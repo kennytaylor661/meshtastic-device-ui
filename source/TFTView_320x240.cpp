@@ -1815,6 +1815,19 @@ void TFTView_320x240::ui_event_signal_scanner_start(lv_event_t *e)
                 spinnerButton = nullptr;
                 THIS->scans = 0;
             } else {
+                char buf[20];
+                // Change button text
+                lv_label_set_text(objects.signal_scanner_start_label, "Wait");
+                // Clear SNR label until respose received
+                lv_label_set_text(objects.signal_scanner_snr_label, "SNR
+");
+                // Clear RSSI label until response received
+                lv_label_set_text(objects.signal_scanner_rssi_label, "RSSI
+");
+                // Clear sliders
+                lv_slider_set_value(objects.snr_slider, -30, LV_ANIM_ON);
+                lv_slider_set_value(objects.rssi_slider, -150, LV_ANIM_ON);
+
                 THIS->scanSignal(0);
             }
         } else if (event_code == LV_EVENT_LONG_PRESSED) {
